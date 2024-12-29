@@ -7,9 +7,9 @@ import { SignedIn, SignedOut, SignInButton, UserButton } from '@clerk/nextjs'
 import React from 'react'
 import ActiveCollaborators from './ActiveCollaborator'
 
-const CollaborativeRoom = () => {
+const CollaborativeRoom = ({ roomId, roomMetadata }: CollaborativeRoomProps) => {
     return (
-        <RoomProvider id="my-room">
+        <RoomProvider id={roomId}>
             <ClientSideSuspense fallback={<div>Loading…</div>}>
                 <div className='collaborative-room'>
                     <Header>
@@ -26,7 +26,7 @@ const CollaborativeRoom = () => {
                             </SignedIn>
                         </div>
                     </Header>
-                    
+
                     <Editor />
                 </div>
             </ClientSideSuspense>
