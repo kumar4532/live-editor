@@ -13,6 +13,7 @@ import { FloatingComposer, FloatingThreads, liveblocksConfig, LiveblocksPlugin, 
 import Loader from '../Loader';
 import FloatingToolbar from './plugins/FloatingToolbarPlugin';
 import { useThreads } from '@liveblocks/react/suspense';
+import Comments from '../Comments';
 
 // Catch any errors that occur during Lexical updates and log them
 // or throw them as needed. If you don't throw them, Lexical will
@@ -41,11 +42,11 @@ export function Editor({ roomId, currentUserType }: { roomId: string, currentUse
   return (
     <LexicalComposer initialConfig={initialConfig}>
       <div className="editor-container size-full">
-        <div className='toolbar-wrapper flex min-w-full justify-between'>
+        <div className="toolbar-wrapper flex min-w-full justify-between">
           <ToolbarPlugin />
         </div>
 
-        <div className='editor-wrapper flex flex-col items-center justify-start'>
+        <div className="editor-wrapper flex flex-col items-center justify-start">
           {status === 'not-loaded' || status === 'loading' ? <Loader /> : (
             <div className="editor-inner min-h-[1100px] relative mb-5 h-fit w-full max-w-[800px] shadow-md lg:mb-10">
               <RichTextPlugin
@@ -60,12 +61,13 @@ export function Editor({ roomId, currentUserType }: { roomId: string, currentUse
               <AutoFocusPlugin />
             </div>
           )}
-        </div>
 
-        <LiveblocksPlugin>
-          <FloatingComposer className='w-[350px]' />
-          <FloatingThreads threads={threads} />
-        </LiveblocksPlugin>
+          <LiveblocksPlugin>
+            <FloatingComposer className="w-[350px]" />
+            <FloatingThreads threads={threads} />
+            <Comments />
+          </LiveblocksPlugin>
+        </div>
       </div>
     </LexicalComposer>
   );
